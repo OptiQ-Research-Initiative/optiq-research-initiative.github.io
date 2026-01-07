@@ -221,26 +221,39 @@
 
     <!-- Top: airy hero + image slot -->
     <section class="home-top">
-      <section class="hero">
-        <div class="kicker">OptiQ Research Initiative</div>
-        <h1>Quantum Computing and Optimization</h1>
-        <p>
-          OptiQ focuses on <strong>Quantum Computing</strong>, <strong>Quantum Machine Learning</strong>,
-          <strong>Numerical Optimization</strong>, <strong>Noisy Optimization</strong>, and
-          <strong>Variational Quantum Algorithms</strong>.
-        </p>
+  <section class="hero">
 
-        <div class="callout">
-          Tip: place a one-sentence mission here once you finalize it (kept intentionally neutral until provided).
-        </div>
-      </section>
+    <div class="kicker">OptiQ Research Initiative</div>
 
-      <aside class="hero-media" aria-label="Hero image">
-        <!-- Put your image at /assets/hero.jpg (or .png) -->
-        <img class="img" src="/assets/hero.jpg" alt="OptiQ visual" onerror="this.style.display='none'; this.parentElement.querySelector('.caption').textContent='Add /assets/hero.jpg (or update the src) to show a hero image.';" />
-        <div class="caption">Replace with your image: <code>/assets/hero.png</code></div>
-      </aside>
-    </section>
+    <h1>Quantum Computing and Optimization</h1>
+
+    <p class="mini" style="max-width: 760px;">
+      OptiQ focuses on <strong>Quantum Computing</strong>, <strong>Quantum Machine Learning</strong>,
+      <strong>Numerical Optimization</strong>, <strong>Noisy Optimization</strong>, and
+      <strong>Variational Quantum Algorithms</strong>.
+    </p>
+
+    <!-- airy mission slot -->
+    <div class="callout" style="max-width: 760px;">
+      <strong>Mission</strong>  
+      Provide a single sentence that expresses the aim of the initiative once finalized.
+    </div>
+
+    <!-- at-a-glance counters -->
+    <div class="chips" style="margin-top: 18px;">
+      <div class="tag">Publications: <span id="c-pub">—</span></div>
+      <div class="tag">Preprints: <span id="c-pre">—</span></div>
+      <div class="tag">Software: <span id="c-soft">—</span></div>
+    </div>
+
+  </section>
+
+  <aside class="hero-media">
+    <img class="img" src="/assets/hero.jpg" alt="OptiQ visual" />
+    <div class="caption">Global visual slot — replace <code>/assets/hero.jpg</code></div>
+  </aside>
+</section>
+
 
     <!-- Explore tiles -->
     <section class="tiles" aria-label="Explore sections">
