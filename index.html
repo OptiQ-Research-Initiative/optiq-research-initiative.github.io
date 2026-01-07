@@ -4,58 +4,314 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OptiQ Research Initiative</title>
+
+  <meta name="description" content="OptiQ Research Initiative — Quantum Computing, Quantum Machine Learning, Numerical Optimization, Noisy Optimization, Variational Quantum Algorithms." />
+
   <link rel="stylesheet" href="/style.css" />
   <script defer src="/site.js"></script>
+
+  <style>
+    /* Home-only layout helpers (kept minimal; still uses global theme tokens) */
+    .home-hero{
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (max-width: 900px){
+      .home-hero{ grid-template-columns: 1fr; }
+    }
+
+    .home-hero .hero{
+      margin: 0;
+    }
+
+    .quick-nav{
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border-strong, var(--border));
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .quick-nav h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .chips{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chip{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+      white-space: nowrap;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      text-decoration: none;
+      border-color: rgba(47,59,214,0.70);
+    }
+
+    .split{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .split{ grid-template-columns: 1fr; }
+    }
+
+    .mini{
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .empty-state{
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 12px;
+      margin-top: 10px;
+    }
+
+    .latest{
+      display: grid;
+      gap: 10px;
+    }
+    .latest-item{
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--surface-2, var(--surface));
+    }
+    .latest-item strong{
+      display: block;
+      margin-bottom: 6px;
+    }
+    .latest-meta{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .latest-links{
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .latest-links a{
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      text-decoration: none;
+    }
+    .latest-links a:hover{
+      text-decoration: none;
+      border-color: rgba(47,59,214,0.70);
+    }
+  </style>
 </head>
+
 <body>
+  <main class="container">
 
-<main class="container">
-  <section class="hero">
-    <div class="kicker">OptiQ Research Initiative</div>
-    <h1>Optimization-first quantum research</h1>
-    <p>
-      We develop methods at the intersection of <strong>Quantum Computing</strong>, <strong>Quantum Machine Learning</strong>,
-      and <strong>Numerical Optimization</strong>, with a practical emphasis on <strong>noisy optimization</strong> and
-      <strong>variational quantum algorithms (VQAs)</strong>.
-    </p>
-  </section>
+    <!-- Airy top area: big hero + quick navigation -->
+    <section class="home-hero">
+      <div class="hero">
+        <div class="kicker">OptiQ Research Initiative</div>
+        <h1>Quantum Computing and Optimization</h1>
+        <p>
+          OptiQ focuses on <strong>Quantum Computing</strong>, <strong>Quantum Machine Learning</strong>,
+          <strong>Numerical Optimization</strong>, <strong>Noisy Optimization</strong>, and
+          <strong>Variational Quantum Algorithms</strong>.
+        </p>
+      </div>
 
-  <section class="grid">
-    <div class="card">
-      <h2>Core Topics</h2>
-      <ul>
-        <li>Variational Quantum Algorithms (VQAs) and trainability</li>
-        <li>Finite-shot / stochastic objectives and robust optimization</li>
-        <li>Quantum machine learning: kernels, feature maps, hybrid models</li>
-        <li>Benchmarking and reproducible evaluation protocols</li>
-      </ul>
+      <aside class="quick-nav" aria-label="Quick navigation">
+        <h2>Explore</h2>
+        <div class="mini">Direct access to all sections.</div>
+        <div class="chips" role="list">
+          <a class="chip" href="/research.html" role="listitem">Research</a>
+          <a class="chip" href="/publications.html" role="listitem">Publications</a>
+          <a class="chip" href="/team.html" role="listitem">Team</a>
+          <a class="chip" href="/software.html" role="listitem">Software</a>
+          <a class="chip" href="/news.html" role="listitem">News</a>
+        </div>
+
+        <div class="empty-state">
+          Optional: add a short mission sentence here once defined.
+        </div>
+      </aside>
+    </section>
+
+    <!-- Highlights + Latest publication -->
+    <section class="split">
+      <section class="section">
+        <h2>Highlights</h2>
+        <div class="mini">
+          Pin items you want visitors to notice immediately (paper, release, talk, milestone).
+        </div>
+
+        <!-- Keep it looking complete without inventing content -->
+        <div class="empty-state">
+          Add highlight entries here (no placeholders will appear once you replace this box with real items).
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Latest publication</h2>
+        <div class="mini">
+          This section automatically shows the newest entry from your publications data.
+        </div>
+
+        <div id="latestPub" class="latest">
+          <div class="latest-item">
+            <strong>Not configured yet</strong>
+            <div class="latest-meta">
+              To enable this, create <code>/data/publications.json</code> and keep it updated.
+              The homepage will always display the most recent item.
+            </div>
+            <div class="latest-links">
+              <a href="/publications.html">Go to Publications</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Airy “What’s inside” section -->
+    <section class="grid">
+      <div class="card">
+        <h2>Research</h2>
+        <p class="mini">
+          Describe directions, subprojects, and topics under the OptiQ scope.
+        </p>
+        <p><a href="/research.html">Open Research →</a></p>
+      </div>
+
+      <div class="card">
+        <h2>Software</h2>
+        <p class="mini">
+          Tools, repositories, documentation, and associated papers.
+        </p>
+        <p><a href="/software.html">Open Software →</a></p>
+      </div>
+
+      <div class="card">
+        <h2>Team</h2>
+        <p class="mini">
+          Member list with dedicated pages per person.
+        </p>
+        <p><a href="/team.html">Open Team →</a></p>
+      </div>
+
+      <div class="card">
+        <h2>News</h2>
+        <p class="mini">
+          Updates and announcements in chronological order.
+        </p>
+        <p><a href="/news.html">Open News →</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> OptiQ Research Initiative
     </div>
+  </footer>
 
-    <div class="card">
-      <h2>What we publish</h2>
-      <ul>
-        <li>Optimization methods and theory for noisy objectives</li>
-        <li>Empirical studies on landscapes, conditioning, and stability</li>
-        <li>Open-source tooling for reproducible experiments</li>
-      </ul>
-    </div>
-  </section>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-  <section class="section">
-    <h2>Get involved</h2>
-    <p>
-      We collaborate with academic and industry partners. If you are interested in joint work, datasets, or benchmarking,
-      please reach out via the contact details listed on the Team page.
-    </p>
-  </section>
-</main>
+    /*
+      Latest publication loader
+      - Create: /data/publications.json
+      - The newest item is selected by date (YYYY-MM-DD) or year (YYYY) if date absent.
+      - This avoids inventing content and keeps the homepage "complete".
+    */
+    (function loadLatestPublication(){
+      const target = document.getElementById("latestPub");
+      if (!target) return;
 
-<footer>
-  <div class="container">
-    <div>© <span id="y"></span> OptiQ Research Initiative. All rights reserved.</div>
-  </div>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
-</footer>
+      function parseSortableDate(p){
+        // Prefer full date; fallback to year; fallback to 0.
+        if (p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date)) return p.date;
+        if (p.year && /^\d{4}$/.test(String(p.year))) return String(p.year) + "-01-01";
+        return "0000-01-01";
+      }
 
+      fetch("/data/publications.json", { cache: "no-store" })
+        .then(r => {
+          if (!r.ok) throw new Error("Missing publications.json");
+          return r.json();
+        })
+        .then(items => {
+          if (!Array.isArray(items) || items.length === 0) throw new Error("Empty publications list");
+
+          // Sort by parsed date descending
+          const sorted = items
+            .slice()
+            .sort((a,b) => parseSortableDate(b).localeCompare(parseSortableDate(a)));
+
+          const p = sorted[0];
+
+          const title = p.title || "Untitled";
+          const authors = p.authors || "";
+          const venue = p.venue || "";
+          const date = p.date || (p.year ? String(p.year) : "");
+          const links = [];
+
+          if (p.url) links.push({ label: "Publication", url: p.url });
+          if (p.pdf) links.push({ label: "PDF", url: p.pdf });
+          if (p.code) links.push({ label: "Code", url: p.code });
+          links.push({ label: "All publications", url: "/publications.html" });
+
+          target.innerHTML = `
+            <div class="latest-item">
+              <strong>${escapeHtml(title)}</strong>
+              <div class="latest-meta">
+                ${escapeHtml([authors, venue, date].filter(Boolean).join(" • "))}
+              </div>
+              <div class="latest-links">
+                ${links.map(l => `<a href="${escapeAttr(l.url)}">${escapeHtml(l.label)}</a>`).join("")}
+              </div>
+            </div>
+          `;
+        })
+        .catch(() => {
+          /* Keep the default “Not configured yet” block. */
+        });
+
+      function escapeHtml(s){
+        return String(s).replace(/[&<>"']/g, c => ({
+          "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+        }[c]));
+      }
+      function escapeAttr(s){
+        return String(s).replace(/"/g, "&quot;");
+      }
+    })();
+  </script>
 </body>
 </html>
