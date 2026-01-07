@@ -4,28 +4,103 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Software • OptiQ</title>
+
   <link rel="stylesheet" href="/style.css" />
   <script defer src="/site.js"></script>
 </head>
+
 <body>
+  <main class="container">
 
-<main class="container">
-  <section class="hero">
-    <div class="kicker">Software</div>
-    <h1>Open-source tooling</h1>
-    <p>List repositories, short descriptions, and status (stable/experimental).</p>
-  </section>
+    <section class="hero">
+      <div class="kicker">Software</div>
+      <h1>Open-source tools</h1>
+      <p>
+        OptiQ software focuses on robust workflows for noisy, hybrid quantum–classical computation:
+        benchmarking quantum ML models beyond accuracy, and variational quantum algorithms for
+        quantum chemistry.
+      </p>
+    </section>
 
-  <section class="section">
-    <h2>Repositories</h2>
-    <ul>
-      <li><strong>optiq-bench</strong> — benchmarking harness for noisy objectives. [GitHub]</li>
-      <li><strong>vqa-optim</strong> — optimization baselines and variance reduction utilities. [GitHub]</li>
-    </ul>
-  </section>
-</main>
+    <section class="grid">
 
-<footer><div class="container">© <span id="y"></span> OptiQ</div></footer>
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+
+      <!-- SA-OO-VQE -->
+      <div class="card">
+        <h2>SA-OO-VQE (Qiskit)</h2>
+        <p>
+          A state-averaged, orbital-optimized VQE workflow designed to treat ground and excited
+          electronic states on a comparable footing. The package is implemented in Python on top
+          of Qiskit, with documentation and distribution via PyPI.
+        </p>
+
+        <ul>
+          <li><strong>Focus:</strong> VQAs for quantum chemistry, state-averaging, orbital optimization</li>
+          <li><strong>Distribution:</strong> pip installable package (<code>saoovqe</code>)</li>
+        </ul>
+
+        <p style="margin-top: 12px;">
+          <a href="https://gitlab.com/MartinBeseda/sa-oo-vqe-qiskit" target="_blank" rel="noopener noreferrer">Repository (GitLab)</a>
+          &nbsp;•&nbsp;
+          <a href="https://pypi.org/project/saoovqe/" target="_blank" rel="noopener noreferrer">PyPI</a>
+          &nbsp;•&nbsp;
+          <a href="https://sa-oo-vqe-qiskit.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">Documentation</a>
+          &nbsp;•&nbsp;
+          <a href="https://arxiv.org/abs/2401.11884" target="_blank" rel="noopener noreferrer">Paper (arXiv:2401.11884)</a>
+          &nbsp;•&nbsp;
+          <a href="https://arxiv.org/pdf/2401.11884" target="_blank" rel="noopener noreferrer">PDF</a>
+        </p>
+      </div>
+
+            <!-- QMetric -->
+      <div class="card">
+        <h2>QMetric</h2>
+        <p>
+          A benchmarking toolkit for quantum neural networks and hybrid quantum–classical models.
+          QMetric provides interpretable diagnostics that complement raw accuracy by exposing issues
+          in circuit design, feature encoding, and training dynamics.
+        </p>
+
+        <ul>
+          <li><strong>Focus:</strong> QML evaluation, expressibility, training stability</li>
+          <li><strong>Use cases:</strong> comparing circuits/encodings, diagnosing training failures</li>
+        </ul>
+
+        <p style="margin-top: 12px;">
+          <a href="https://arxiv.org/abs/2506.23765" target="_blank" rel="noopener noreferrer">Paper (arXiv:2506.23765)</a>
+          &nbsp;•&nbsp;
+          <a href="https://gitlab.com/illesova.silvie.scholar/qmetric" target="_blank" rel="noopener noreferrer">Repository (GitLab)</a>
+        </p>
+      </div>
+
+    </section>
+
+    <section class="section">
+      <h2>How to cite</h2>
+      <p>
+        If you use these tools in academic work, please cite the associated papers and include a link
+        to the corresponding repository.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Contributing</h2>
+      <p>
+        Contributions, issues, and feature requests are welcome. Please use the issue trackers and
+        contribution guidelines in each repository.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> OptiQ Research Initiative
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
