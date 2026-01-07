@@ -1,0 +1,15 @@
+[
+  {
+    "name": "QMetric",
+    "paper": "https://arxiv.org/abs/2506.23765",
+    "repo": "https://gitlab.com/illesova.silvie.scholar/qmetric"
+  },
+  {
+    "name": "SA-OO-VQE (Qiskit)",
+    "repo": "https://gitlab.com/MartinBeseda/sa-oo-vqe-qiskit",
+    "pypi": "https://pypi.org/project/saoovqe/",
+    "docs": "https://sa-oo-vqe-qiskit.readthedocs.io/en/latest/",
+    "paper_pdf": "https://arxiv.org/pdf/2401.11884",
+    "paper": "https://arxiv.org/abs/2401.11884"
+  }
+]
