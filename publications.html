@@ -4,35 +4,222 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publications • OptiQ</title>
+
   <link rel="stylesheet" href="/style.css" />
   <script defer src="/site.js"></script>
+
+  <style>
+    /* Publications-only helpers */
+    .pub-controls{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pub-search{
+      flex: 1 1 320px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .pub-search input{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      outline: none;
+    }
+    .pub-search input:focus{
+      border-color: rgba(47,59,214,0.85);
+    }
+    .pub-year{
+      margin-top: 18px;
+    }
+    .pub-year h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .pub-list{
+      display: grid;
+      gap: 10px;
+    }
+    .pub-item{
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-strong, var(--border));
+      background: var(--surface);
+    }
+    .pub-title{
+      margin: 0 0 6px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .pub-meta{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .pub-links{
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pub-links a{
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      text-decoration: none;
+    }
+    .pub-links a:hover{
+      text-decoration: none;
+      border-color: rgba(47,59,214,0.70);
+    }
+    .note{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
+  <main class="container">
+    <section class="hero">
+      <div class="kicker">Publications</div>
+      <h1>Papers and preprints</h1>
+      <p>
+        This page is generated from <code>/data/publications.json</code>.
+      </p>
 
-<main class="container">
-  <section class="hero">
-    <div class="kicker">Publications</div>
-    <h1>Papers, preprints, and talks</h1>
-    <p>Keep this page as a curated list. Link to arXiv/DOI and code when available.</p>
-  </section>
+      <div class="pub-controls">
+        <div class="pub-search">
+          <input id="q" type="search" placeholder="Search title / authors / venue / year…" aria-label="Search publications" />
+        </div>
+        <div class="note" id="count"></div>
+      </div>
+    </section>
 
-  <section class="section">
-    <h2>2026</h2>
-    <ul>
-      <li><strong>Title of Paper</strong> — Author A, Author B. <em>Venue / arXiv</em>. [PDF] [Code]</li>
-      <li><strong>Title of Paper</strong> — Author A, Author B. <em>Venue / arXiv</em>. [PDF] [Code]</li>
-    </ul>
-  </section>
+    <div id="pubRoot"></div>
 
-  <section class="section">
-    <h2>2025</h2>
-    <ul>
-      <li><strong>Title of Paper</strong> — Author A, Author B. <em>Venue / arXiv</em>. [PDF] [Code]</li>
-    </ul>
-  </section>
-</main>
+    <section class="section">
+      <h2>Maintaining the list</h2>
+      <p class="note">
+        Update <code>/data/publications.json</code>. If an entry has <code>date</code> (YYYY-MM-DD), it is used for ordering.
+        Otherwise, ordering uses <code>year</code>.
+      </p>
+    </section>
+  </main>
 
-<footer><div class="container">© <span id="y"></span> OptiQ</div></footer>
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <footer>
+    <div class="container">© <span id="y"></span> OptiQ Research Initiative</div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const root = document.getElementById("pubRoot");
+    const q = document.getElementById("q");
+    const count = document.getElementById("count");
+
+    function parseSortableDate(p){
+      if (p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date)) return p.date;
+      if (p.year && /^\d{4}$/.test(String(p.year))) return String(p.year) + "-01-01";
+      return "0000-01-01";
+    }
+
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+      }[c]));
+    }
+    function escapeAttr(s){
+      return String(s ?? "").replace(/"/g, "&quot;");
+    }
+
+    function render(items, query){
+      const qq = (query || "").trim().toLowerCase();
+
+      const filtered = items.filter(p => {
+        const blob = [
+          p.title, p.authors, p.venue, p.year, p.arxiv
+        ].filter(Boolean).join(" ").toLowerCase();
+        return blob.includes(qq);
+      });
+
+      // Sort newest first (date/year)
+      filtered.sort((a,b) => parseSortableDate(b).localeCompare(parseSortableDate(a)));
+
+      count.textContent = filtered.length ? `${filtered.length} item(s)` : "No results";
+
+      // Group by year (desc)
+      const byYear = new Map();
+      for (const p of filtered){
+        const y = p.year ? String(p.year) : "Unknown";
+        if (!byYear.has(y)) byYear.set(y, []);
+        byYear.get(y).push(p);
+      }
+      const years = Array.from(byYear.keys()).sort((a,b) => b.localeCompare(a));
+
+      root.innerHTML = years.map(y => {
+        const pubs = byYear.get(y).map(p => {
+          const title = escapeHtml(p.title || "Untitled");
+          const authors = escapeHtml(p.authors || "");
+          const venue = escapeHtml(p.venue || "");
+          const year = escapeHtml(p.year || "");
+          const arxiv = escapeHtml(p.arxiv || "");
+          const meta = [authors, venue, year, arxiv ? ("arXiv:" + arxiv) : ""].filter(Boolean).join(" • ");
+
+          const links = [];
+          if (p.url) links.push(`<a href="${escapeAttr(p.url)}" target="_blank" rel="noopener noreferrer">Link</a>`);
+          if (p.pdf) links.push(`<a href="${escapeAttr(p.pdf)}" target="_blank" rel="noopener noreferrer">PDF</a>`);
+
+          return `
+            <div class="pub-item">
+              <div class="pub-title">${title}</div>
+              <div class="pub-meta">${meta}</div>
+              ${links.length ? `<div class="pub-links">${links.join("")}</div>` : ""}
+            </div>
+          `;
+        }).join("");
+
+        return `
+          <section class="pub-year">
+            <h2>${escapeHtml(y)}</h2>
+            <div class="pub-list">${pubs}</div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    let all = [];
+    fetch("/data/publications.json", { cache: "no-store" })
+      .then(r => {
+        if (!r.ok) throw new Error("Missing /data/publications.json");
+        return r.json();
+      })
+      .then(items => {
+        all = Array.isArray(items) ? items : [];
+        render(all, "");
+      })
+      .catch(() => {
+        root.innerHTML = `
+          <section class="section">
+            <h2>Publications not available</h2>
+            <p class="note">Create <code>/data/publications.json</code> to populate this page.</p>
+          </section>
+        `;
+      });
+
+    q.addEventListener("input", () => render(all, q.value));
+  </script>
 </body>
 </html>
