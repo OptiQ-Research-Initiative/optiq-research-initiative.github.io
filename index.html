@@ -11,60 +11,132 @@
   <script defer src="/site.js"></script>
 
   <style>
-    /* Home-only layout helpers (kept minimal; still uses global theme tokens) */
-    .home-hero{
+    /* Home-only layout helpers (kept minimal; uses global tokens) */
+
+    .home-top{
       display: grid;
-      grid-template-columns: 1.35fr 0.65fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 14px;
       margin-top: 18px;
+      align-items: stretch;
     }
     @media (max-width: 900px){
-      .home-hero{ grid-template-columns: 1fr; }
+      .home-top{ grid-template-columns: 1fr; }
     }
 
-    .home-hero .hero{
+    .hero{
       margin: 0;
     }
 
-    .quick-nav{
+    /* Image slot */
+    .hero-media{
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-strong, var(--border));
+      background: var(--surface);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      min-height: 240px;
+    }
+    .hero-media .img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero-media .caption{
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Explore tiles */
+    .tiles{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .tile{
+      grid-column: span 4;
       padding: 18px;
       border-radius: var(--radius-lg);
       background: var(--surface);
       border: 1px solid var(--border-strong, var(--border));
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-
-    .quick-nav h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-
-    .chips{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .chip{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-      color: var(--text);
       text-decoration: none;
       transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
-      white-space: nowrap;
+      display: grid;
+      gap: 8px;
     }
-    .chip:hover{
+    .tile:hover{
       transform: translateY(-1px);
       text-decoration: none;
-      border-color: rgba(47,59,214,0.70);
+      border-color: rgba(47,59,214,0.80);
+      background: var(--surface-2, var(--surface));
+    }
+    .tile .k{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .tile .t{
+      color: var(--text);
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+    .tile .d{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    @media (max-width: 900px){
+      .tile{ grid-column: span 6; }
+    }
+    @media (max-width: 640px){
+      .tile{ grid-column: span 12; }
     }
 
+    /* Stats strip */
+    .stats{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .stat{
+      grid-column: span 4;
+      padding: 16px 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border-strong, var(--border));
+      display: grid;
+      gap: 6px;
+    }
+    .stat .n{
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+    }
+    .stat .l{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    @media (max-width: 900px){
+      .stat{ grid-column: span 6; }
+    }
+    @media (max-width: 640px){
+      .stat{ grid-column: span 12; }
+    }
+
+    /* Latest + highlights */
     .split{
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -93,6 +165,7 @@
     .latest{
       display: grid;
       gap: 10px;
+      margin-top: 10px;
     }
     .latest-item{
       padding: 14px;
@@ -128,15 +201,27 @@
       text-decoration: none;
       border-color: rgba(47,59,214,0.70);
     }
+
+    /* Small “callout” line */
+    .callout{
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border-strong, var(--border));
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 13px;
+    }
   </style>
 </head>
 
 <body>
   <main class="container">
 
-    <!-- Airy top area: big hero + quick navigation -->
-    <section class="home-hero">
-      <div class="hero">
+    <!-- Top: airy hero + image slot -->
+    <section class="home-top">
+      <section class="hero">
         <div class="kicker">OptiQ Research Initiative</div>
         <h1>Quantum Computing and Optimization</h1>
         <p>
@@ -144,23 +229,72 @@
           <strong>Numerical Optimization</strong>, <strong>Noisy Optimization</strong>, and
           <strong>Variational Quantum Algorithms</strong>.
         </p>
-      </div>
 
-      <aside class="quick-nav" aria-label="Quick navigation">
-        <h2>Explore</h2>
-        <div class="mini">Direct access to all sections.</div>
-        <div class="chips" role="list">
-          <a class="chip" href="/research.html" role="listitem">Research</a>
-          <a class="chip" href="/publications.html" role="listitem">Publications</a>
-          <a class="chip" href="/team.html" role="listitem">Team</a>
-          <a class="chip" href="/software.html" role="listitem">Software</a>
-          <a class="chip" href="/news.html" role="listitem">News</a>
+        <div class="callout">
+          Tip: place a one-sentence mission here once you finalize it (kept intentionally neutral until provided).
         </div>
+      </section>
 
-        <div class="empty-state">
-          Optional: add a short mission sentence here once defined.
-        </div>
+      <aside class="hero-media" aria-label="Hero image">
+        <!-- Put your image at /assets/hero.jpg (or .png) -->
+        <img class="img" src="/assets/hero.jpg" alt="OptiQ visual" onerror="this.style.display='none'; this.parentElement.querySelector('.caption').textContent='Add /assets/hero.jpg (or update the src) to show a hero image.';" />
+        <div class="caption">Replace with your image: <code>/assets/hero.jpg</code></div>
       </aside>
+    </section>
+
+    <!-- Explore tiles -->
+    <section class="tiles" aria-label="Explore sections">
+      <a class="tile" href="/research.html">
+        <div class="k">Explore</div>
+        <div class="t">Research</div>
+        <div class="d">Topics, directions, and technical scope.</div>
+      </a>
+
+      <a class="tile" href="/publications.html">
+        <div class="k">Explore</div>
+        <div class="t">Publications</div>
+        <div class="d">Papers and preprints (auto-generated from JSON).</div>
+      </a>
+
+      <a class="tile" href="/software.html">
+        <div class="k">Explore</div>
+        <div class="t">Software</div>
+        <div class="d">Tools, repositories, and documentation.</div>
+      </a>
+
+      <a class="tile" href="/team.html">
+        <div class="k">Explore</div>
+        <div class="t">Team</div>
+        <div class="d">Members with individual profile pages.</div>
+      </a>
+
+      <a class="tile" href="/news.html">
+        <div class="k">Explore</div>
+        <div class="t">News</div>
+        <div class="d">Updates and announcements.</div>
+      </a>
+
+      <a class="tile" href="/publications.html#how-to-cite">
+        <div class="k">Quick link</div>
+        <div class="t">How to cite</div>
+        <div class="d">Citation guidance and record maintenance.</div>
+      </a>
+    </section>
+
+    <!-- Counters (computed from data files) -->
+    <section class="stats" aria-label="At-a-glance statistics">
+      <div class="stat">
+        <div class="n" id="statPubs">—</div>
+        <div class="l">Publications</div>
+      </div>
+      <div class="stat">
+        <div class="n" id="statPreprints">—</div>
+        <div class="l">Preprints (arXiv / Preprints)</div>
+      </div>
+      <div class="stat">
+        <div class="n" id="statSoftware">—</div>
+        <div class="l">Software projects</div>
+      </div>
     </section>
 
     <!-- Highlights + Latest publication -->
@@ -168,69 +302,30 @@
       <section class="section">
         <h2>Highlights</h2>
         <div class="mini">
-          Pin items you want visitors to notice immediately (paper, release, talk, milestone).
+          Add or remove highlight blocks as needed. This area is intentionally manual (no invented items).
         </div>
 
-        <!-- Keep it looking complete without inventing content -->
         <div class="empty-state">
-          Add highlight entries here (no placeholders will appear once you replace this box with real items).
+          Add highlight entries here (e.g., a new preprint, a software release, a workshop talk).
         </div>
       </section>
 
       <section class="section">
         <h2>Latest publication</h2>
         <div class="mini">
-          This section automatically shows the newest entry from your publications data.
+          Automatically selected as the newest item in <code>/data/publications.json</code> (by <code>date</code>, then <code>year</code>).
         </div>
 
         <div id="latestPub" class="latest">
           <div class="latest-item">
-            <strong>Not configured yet</strong>
-            <div class="latest-meta">
-              To enable this, create <code>/data/publications.json</code> and keep it updated.
-              The homepage will always display the most recent item.
-            </div>
+            <strong>Loading…</strong>
+            <div class="latest-meta">If this stays visible, ensure <code>/data/publications.json</code> exists.</div>
             <div class="latest-links">
-              <a href="/publications.html">Go to Publications</a>
+              <a href="/publications.html">Open Publications</a>
             </div>
           </div>
         </div>
       </section>
-    </section>
-
-    <!-- Airy “What’s inside” section -->
-    <section class="grid">
-      <div class="card">
-        <h2>Research</h2>
-        <p class="mini">
-          Describe directions, subprojects, and topics under the OptiQ scope.
-        </p>
-        <p><a href="/research.html">Open Research →</a></p>
-      </div>
-
-      <div class="card">
-        <h2>Software</h2>
-        <p class="mini">
-          Tools, repositories, documentation, and associated papers.
-        </p>
-        <p><a href="/software.html">Open Software →</a></p>
-      </div>
-
-      <div class="card">
-        <h2>Team</h2>
-        <p class="mini">
-          Member list with dedicated pages per person.
-        </p>
-        <p><a href="/team.html">Open Team →</a></p>
-      </div>
-
-      <div class="card">
-        <h2>News</h2>
-        <p class="mini">
-          Updates and announcements in chronological order.
-        </p>
-        <p><a href="/news.html">Open News →</a></p>
-      </div>
     </section>
 
   </main>
@@ -244,22 +339,25 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    /*
-      Latest publication loader
-      - Create: /data/publications.json
-      - The newest item is selected by date (YYYY-MM-DD) or year (YYYY) if date absent.
-      - This avoids inventing content and keeps the homepage "complete".
-    */
-    (function loadLatestPublication(){
-      const target = document.getElementById("latestPub");
-      if (!target) return;
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+      }[c]));
+    }
+    function escapeAttr(s){
+      return String(s ?? "").replace(/"/g, "&quot;");
+    }
+    function parseSortableDate(p){
+      if (p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date)) return p.date;
+      if (p.year && /^\d{4}$/.test(String(p.year))) return String(p.year) + "-01-01";
+      return "0000-01-01";
+    }
 
-      function parseSortableDate(p){
-        // Prefer full date; fallback to year; fallback to 0.
-        if (p.date && /^\d{4}-\d{2}-\d{2}$/.test(p.date)) return p.date;
-        if (p.year && /^\d{4}$/.test(String(p.year))) return String(p.year) + "-01-01";
-        return "0000-01-01";
-      }
+    // Latest publication + publication counters
+    (function publicationsWidgets(){
+      const latestTarget = document.getElementById("latestPub");
+      const statPubs = document.getElementById("statPubs");
+      const statPreprints = document.getElementById("statPreprints");
 
       fetch("/data/publications.json", { cache: "no-store" })
         .then(r => {
@@ -267,13 +365,21 @@
           return r.json();
         })
         .then(items => {
-          if (!Array.isArray(items) || items.length === 0) throw new Error("Empty publications list");
+          if (!Array.isArray(items)) items = [];
+          const total = items.length;
 
-          // Sort by parsed date descending
-          const sorted = items
-            .slice()
-            .sort((a,b) => parseSortableDate(b).localeCompare(parseSortableDate(a)));
+          const preprints = items.filter(p => {
+            const v = String(p.venue || "").toLowerCase();
+            return v.includes("arxiv") || v.includes("preprints");
+          }).length;
 
+          if (statPubs) statPubs.textContent = String(total);
+          if (statPreprints) statPreprints.textContent = String(preprints);
+
+          if (!latestTarget) return;
+          if (items.length === 0) throw new Error("Empty publications list");
+
+          const sorted = items.slice().sort((a,b) => parseSortableDate(b).localeCompare(parseSortableDate(a)));
           const p = sorted[0];
 
           const title = p.title || "Untitled";
@@ -282,17 +388,15 @@
           const date = p.date || (p.year ? String(p.year) : "");
           const links = [];
 
-          if (p.url) links.push({ label: "Publication", url: p.url });
+          if (p.url) links.push({ label: "Link", url: p.url });
           if (p.pdf) links.push({ label: "PDF", url: p.pdf });
           if (p.code) links.push({ label: "Code", url: p.code });
           links.push({ label: "All publications", url: "/publications.html" });
 
-          target.innerHTML = `
+          latestTarget.innerHTML = `
             <div class="latest-item">
               <strong>${escapeHtml(title)}</strong>
-              <div class="latest-meta">
-                ${escapeHtml([authors, venue, date].filter(Boolean).join(" • "))}
-              </div>
+              <div class="latest-meta">${escapeHtml([authors, venue, date].filter(Boolean).join(" • "))}</div>
               <div class="latest-links">
                 ${links.map(l => `<a href="${escapeAttr(l.url)}">${escapeHtml(l.label)}</a>`).join("")}
               </div>
@@ -300,17 +404,37 @@
           `;
         })
         .catch(() => {
-          /* Keep the default “Not configured yet” block. */
+          if (statPubs) statPubs.textContent = "—";
+          if (statPreprints) statPreprints.textContent = "—";
+          if (latestTarget) {
+            latestTarget.innerHTML = `
+              <div class="latest-item">
+                <strong>Latest publication unavailable</strong>
+                <div class="latest-meta">Create <code>/data/publications.json</code> to enable this section.</div>
+                <div class="latest-links">
+                  <a href="/publications.html">Open Publications</a>
+                </div>
+              </div>
+            `;
+          }
         });
+    })();
 
-      function escapeHtml(s){
-        return String(s).replace(/[&<>"']/g, c => ({
-          "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
-        }[c]));
-      }
-      function escapeAttr(s){
-        return String(s).replace(/"/g, "&quot;");
-      }
+    // Software counter (from /data/software.json)
+    (function softwareCounter(){
+      const statSoftware = document.getElementById("statSoftware");
+      fetch("/data/software.json", { cache: "no-store" })
+        .then(r => {
+          if (!r.ok) throw new Error("Missing software.json");
+          return r.json();
+        })
+        .then(items => {
+          if (!Array.isArray(items)) items = [];
+          if (statSoftware) statSoftware.textContent = String(items.length);
+        })
+        .catch(() => {
+          if (statSoftware) statSoftware.textContent = "—";
+        });
     })();
   </script>
 </body>
