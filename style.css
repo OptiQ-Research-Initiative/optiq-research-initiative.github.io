@@ -2,7 +2,6 @@
    OptiQ Research Initiative — Global Static Stylesheet
    No Jekyll • Plain GitHub Pages
    Navigation bubbles • Responsive layout • Member pages
-   Dark/Light theme via :root[data-theme="..."]
    ===================================================== */
 
 /* -----------------------------
@@ -23,7 +22,6 @@
 
 /* -----------------------------
    Dark theme (default)
-   No purple: primary accent is INDIGO
    ----------------------------- */
 
 :root,
@@ -37,39 +35,41 @@
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.70);
 
-  /* Accents (no purple) */
-  --brand: #2f3bd6;     /* indigo */
-  --brand-2: #12bfa3;   /* teal */
+  /* Indigo + teal accents */
+  --brand: #2f3bd6;
+  --brand-2: #12bfa3;
 
-  --link: #a8b2ff;      /* indigo-tinted link */
+  --link: #a8b2ff;
 
   --shadow: 0 10px 30px rgba(0,0,0,0.35);
   --header-bg: rgba(11,16,32,0.55);
 }
 
 /* -----------------------------
-   Light theme
-   No purple: primary accent is INDIGO
+   LIGHT THEME — BLUEISH
    ----------------------------- */
 
 :root[data-theme="light"]{
-  --bg: #f6f7fb;
+  /* Cool blue background instead of gray */
+  --bg: #e8ecf8;
 
-  --surface: rgba(10,15,30,0.04);
-  --surface-2: rgba(10,15,30,0.06);
-  --border: rgba(10,15,30,0.12);
+  --surface: rgba(10,15,30,0.05);
+  --surface-2: rgba(10,15,30,0.08);
+  --border: rgba(10,15,30,0.14);
 
-  --text: rgba(10,15,30,0.92);
-  --muted: rgba(10,15,30,0.65);
+  --text: rgba(10,15,30,0.95);
+  --muted: rgba(10,15,30,0.70);
 
-  /* Accents (no purple) */
-  --brand: #2430c6;     /* indigo */
-  --brand-2: #0d9488;   /* teal */
+  /* Blue/indigo accents for light mode */
+  --brand: #2c38b8;
+  --brand-2: #0ea5a4;
 
-  --link: #1f2aa8;
+  --link: #1b2490;
 
   --shadow: 0 10px 30px rgba(10,15,30,0.12);
-  --header-bg: rgba(246,247,251,0.70);
+
+  /* Light header slightly brighter and colder */
+  --header-bg: rgba(232,236,248,0.80);
 }
 
 /* -----------------------------
@@ -84,11 +84,10 @@ body{
   font-family: var(--font);
   color: var(--text);
 
-  /* Background glow uses brand tokens (indigo + teal), not hardcoded purple */
   background:
-    radial-gradient(900px 500px at 20% 10%, rgba(47,59,214,0.26), transparent 55%),
-    radial-gradient(900px 500px at 80% 0%, rgba(18,191,163,0.18), transparent 55%),
-    radial-gradient(1000px 800px at 50% 100%, rgba(47,59,214,0.12), transparent 60%),
+    radial-gradient(900px 500px at 20% 10%, rgba(47,59,214,0.24), transparent 55%),
+    radial-gradient(900px 500px at 80% 0%, rgba(18,191,163,0.16), transparent 55%),
+    radial-gradient(1000px 800px at 50% 100%, rgba(47,59,214,0.10), transparent 60%),
     var(--bg);
 }
 
@@ -134,15 +133,13 @@ a:hover{ text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
 }
 
-/* Brand block */
+/* Brand */
 .brand{
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 220px;
 }
 
 .brand-mark{
@@ -153,254 +150,165 @@ a:hover{ text-decoration: underline; }
   box-shadow: var(--shadow);
 }
 
-.brand-title{ line-height: 1.15; }
-
 .brand-title strong{
-  display: block;
-  font-size: 16px;
+  display:block;
+  font-size:16px;
 }
 
 .brand-title span{
-  display: block;
-  font-size: 12px;
   color: var(--muted);
+  font-size:12px;
 }
 
 /* -----------------------------
-   Bubble (pill) navigation
-   Hover states are brand-based (indigo), not purple
+   Bubble navigation
    ----------------------------- */
 
 .nav{
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-end;
-  align-items: center;
+  align-items:center;
+  justify-content:flex-end;
 }
 
 .nav a{
-  display: inline-flex;
-  align-items: center;
   padding: 10px 14px;
-
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-  color: var(--text);
-
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+  color:var(--text);
   transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
-
-  white-space: nowrap;
 }
 
 .nav a:hover{
   transform: translateY(-1px);
-  text-decoration: none;
-  border-color: rgba(47,59,214,0.55); /* brand-based */
+  border-color: rgba(47,59,214,0.60);
 }
 
 .nav a.active{
-  border-color: rgba(47,59,214,0.70);
-  background: linear-gradient(180deg, rgba(47,59,214,0.22), rgba(255,255,255,0.05));
+  border-color: rgba(47,59,214,0.75);
+  background: linear-gradient(180deg, rgba(47,59,214,0.20), rgba(255,255,255,0.06));
 }
 
 /* -----------------------------
-   Theme toggle button
-   Hover states are brand-based (indigo)
+   Theme toggle
    ----------------------------- */
 
 .theme-toggle{
-  font-size: 13px;
-  padding: 10px 14px;
-
+  font-size:13px;
+  padding:10px 14px;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-  color: var(--text);
-
-  cursor: pointer;
-  user-select: none;
-
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+  color:var(--text);
+  cursor:pointer;
   transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }
 
 .theme-toggle:hover{
-  transform: translateY(-1px);
-  border-color: rgba(47,59,214,0.70);
+  transform:translateY(-1px);
+  border-color: rgba(47,59,214,0.75);
 }
 
 /* -----------------------------
-   Main layout
+   Layout
    ----------------------------- */
 
 main{
   padding: 34px 0 60px;
 }
 
-/* Hero banner */
+/* Hero */
 .hero{
   padding: 26px;
   border-radius: var(--radius-lg);
-
-  background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border:1px solid var(--border);
+  background: var(--surface);
 }
 
 .hero h1{
   margin: 6px 0 10px;
-  font-size: 34px;
-  letter-spacing: 0.2px;
+  font-size:32px;
 }
 
 .hero p{
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.6;
+  color:var(--muted);
+  line-height:1.6;
 }
 
-/* 12-column grid */
+/* Grid + cards */
 .grid{
-  margin-top: 18px;
-  display: grid;
+  margin-top:18px;
+  display:grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 14px;
+  gap:14px;
 }
 
-/* Surface card */
 .card{
   grid-column: span 6;
-  padding: 18px;
+  padding:18px;
   border-radius: var(--radius-lg);
-
   background: var(--surface);
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 }
-
-.card h2{
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-.card p,
-.card li{
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.card ul{
-  margin: 10px 0 0 18px;
-}
-
-/* -----------------------------
-   Generic content sections
-   ----------------------------- */
 
 .section{
-  margin-top: 22px;
-  padding: 18px;
+  margin-top:22px;
+  padding:18px;
   border-radius: var(--radius-lg);
-
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border:1px solid var(--border);
 }
 
-.section h2{
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-/* -----------------------------
-   Team member cards
-   Hover states are brand-based (indigo)
-   ----------------------------- */
-
+/* Team */
 .people-grid{
-  display: grid;
+  display:grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 14px;
-  margin-top: 14px;
+  gap:14px;
+  margin-top:14px;
 }
 
 .person{
   grid-column: span 4;
-  padding: 16px;
-
+  padding:16px;
   border-radius: var(--radius-lg);
   background: var(--surface);
-  border: 1px solid var(--border);
-
-  display: block;
+  border:1px solid var(--border);
   transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }
 
 .person:hover{
   transform: translateY(-1px);
-  text-decoration: none;
-  border-color: rgba(47,59,214,0.55);
+  border-color: rgba(47,59,214,0.60);
   background: var(--surface-2);
 }
 
-.person strong{
-  display: block;
-  margin-bottom: 6px;
-  font-size: 15px;
-}
-
-.person .role{
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.person .tags{
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* Interest tags */
 .tag{
-  font-size: 12px;
-  color: var(--text);
-  padding: 6px 10px;
-
+  font-size:12px;
+  padding:6px 10px;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
+  border:1px solid var(--border);
+  background: rgba(255,255,255,0.06);
 }
 
-/* -----------------------------
-   Footer
-   ----------------------------- */
-
+/* Footer */
 footer{
-  padding: 22px 0 40px;
-  color: var(--muted);
-
-  border-top: 1px solid var(--border);
-  background: rgba(0,0,0,0.10);
+  padding:22px 0 40px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  background: rgba(0,0,0,0.08);
 }
 
 /* -----------------------------
-   Responsive rules
+   Responsive
    ----------------------------- */
 
-@media (max-width: 900px){
-  .brand{ min-width: auto; }
-
-  .grid .card{ grid-column: span 12; }
-
-  .people-grid .person{ grid-column: span 6; }
-
-  .hero h1{ font-size: 28px; }
+@media(max-width: 900px){
+  .card{ grid-column: span 12; }
+  .person{ grid-column: span 6; }
 }
 
-@media (max-width: 640px){
-  .people-grid .person{ grid-column: span 12; }
+@media(max-width: 640px){
+  .person{ grid-column: span 12; }
 }
