@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research • OptiQ</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script defer src="/site.js"></script>
+</head>
+<body>
+
+<main class="container">
+  <section class="hero">
+    <div class="kicker">Research</div>
+    <h1>Methods for noisy, hybrid quantum workloads</h1>
+    <p>
+      Our research focuses on optimization and learning under the measurement noise and sampling constraints of near-term quantum systems.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Variational Quantum Algorithms</h2>
+    <ul>
+      <li>Ansatz design: expressivity vs. trainability trade-offs</li>
+      <li>Noise-aware training and initialization</li>
+      <li>Hardware-efficient, resource-aware circuit families</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Quantum Machine Learning</h2>
+    <ul>
+      <li>Quantum kernels and feature maps</li>
+      <li>Generalization and robustness in finite-shot settings</li>
+      <li>Hybrid quantum–classical model evaluation</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Noisy Optimization</h2>
+    <ul>
+      <li>Gradient-free / stochastic methods for noisy objectives</li>
+      <li>Trust-region and surrogate-assisted strategies</li>
+      <li>Variance reduction and reliable stopping criteria</li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="container">© <span id="y"></span> OptiQ</div></footer>
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
