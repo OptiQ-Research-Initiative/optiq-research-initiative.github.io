@@ -1,0 +1,94 @@
+[
+  {
+    "title": "Transformation-free generation of a quasi-diabatic representation from the state-average orbital-optimized variational quantum eigensolver",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Martin Beseda; Saad Yalouz; Benjamin Lasorne; Bruno Senjean",
+    "venue": "Journal of Chemical Theory and Computation",
+    "year": 2025
+  },
+  {
+    "title": "State-Averaged Orbital-Optimized VQE: A quantum algorithm for the democratic description of ground and excited electronic states",
+    "authors": "Martin Beseda; Silvie Ill\u00e9sov\u00e1; Saad Yalouz; Bruno Senjean",
+    "venue": "arXiv",
+    "year": 2024,
+    "arxiv": "2401.11884",
+    "date": "2024-01-01",
+    "url": "https://arxiv.org/abs/2401.11884",
+    "pdf": "https://arxiv.org/pdf/2401.11884"
+  },
+  {
+    "title": "Numerical Optimization Strategies for the Variational Hamiltonian Ansatz in Noisy Quantum Environments",
+    "authors": "S. Ill\u00e9sov\u00e1; V. Nov\u00e1k; T. Bezd\u011bk; M. Beseda; C. Possel",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2505.22398",
+    "date": "2025-05-01",
+    "url": "https://arxiv.org/abs/2505.22398",
+    "pdf": "https://arxiv.org/pdf/2505.22398"
+  },
+  {
+    "title": "QMetric: Benchmarking Quantum Neural Networks Across Circuits, Features, and Training Dimensions",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Tomasz Rybotycki; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2506.23765",
+    "date": "2025-06-01",
+    "url": "https://arxiv.org/abs/2506.23765",
+    "pdf": "https://arxiv.org/pdf/2506.23765"
+  },
+  {
+    "title": "On the Importance of Fundamental Properties in Quantum-Classical Machine Learning Models",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Tomasz Rybotycki; Piotr Gawron; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2507.10161",
+    "date": "2025-07-01",
+    "url": "https://arxiv.org/abs/2507.10161",
+    "pdf": "https://arxiv.org/pdf/2507.10161"
+  },
+  {
+    "title": "Statistical Benchmarking of Optimization Methods for Variational Quantum Eigensolver under Quantum Noise",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Tom\u00e1\u0161 Bezd\u011bk; Vojt\u011bch Nov\u00e1k; Bruno Senjean; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2510.08727",
+    "date": "2025-10-01",
+    "url": "https://arxiv.org/abs/2510.08727",
+    "pdf": "https://arxiv.org/pdf/2510.08727"
+  },
+  {
+    "title": "Classical Optimization Strategies for Variational Quantum Algorithms: A Systematic Study of Noise Effects and Parameter Efficiency",
+    "authors": "Tom\u00e1\u0161 Bezd\u011bk; Haomu Yuan; Vojt\u011bch Nov\u00e1k; Silvie Ill\u00e9sov\u00e1; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2511.09314",
+    "date": "2025-11-01",
+    "url": "https://arxiv.org/abs/2511.09314",
+    "pdf": "https://arxiv.org/pdf/2511.09314"
+  },
+  {
+    "title": "From Classical to Hybrid: A Practical Framework for Quantum-Enhanced Learning",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Tom\u00e1\u0161 Bezd\u011bk; Vojt\u011bch Nov\u00e1k; Ivan Zelinka; Stefano Cacciatore; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2511.08205",
+    "date": "2025-11-01",
+    "url": "https://arxiv.org/abs/2511.08205",
+    "pdf": "https://arxiv.org/pdf/2511.08205"
+  },
+  {
+    "title": "Reliable Optimization Under Noise in Quantum Variational Algorithms",
+    "authors": "Vojt\u011bch Nov\u00e1k; Silvie Ill\u00e9sov\u00e1; Tom\u00e1\u0161 Bezd\u011bk; Ivan Zelinka; Martin Beseda",
+    "venue": "arXiv",
+    "year": 2025,
+    "arxiv": "2511.08289",
+    "date": "2025-11-01",
+    "url": "https://arxiv.org/abs/2511.08289",
+    "pdf": "https://arxiv.org/pdf/2511.08289"
+  },
+  {
+    "title": "On the Complementarity of Classical Convolution and Quantum Neural Networks in Image Classification",
+    "authors": "Silvie Ill\u00e9sov\u00e1; Emmanuel Obeng; Tom\u00e1\u0161 Bezd\u011bk; Vojt\u011bch Nov\u00e1k; Martin Beseda",
+    "venue": "Preprints",
+    "year": 2025
+  }
+]
