@@ -2,10 +2,11 @@
    OptiQ Research Initiative — Global Static Stylesheet
    No Jekyll • Plain GitHub Pages
    Navigation bubbles • Responsive layout • Member pages
+   Dark/Light theme via :root[data-theme="..."]
    ===================================================== */
 
 /* -----------------------------
-   Global tokens (edit here)
+   Global tokens (layout + fonts)
    ----------------------------- */
 
 :root{
@@ -22,6 +23,7 @@
 
 /* -----------------------------
    Dark theme (default)
+   No purple: primary accent is INDIGO
    ----------------------------- */
 
 :root,
@@ -35,17 +37,19 @@
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.70);
 
-  --brand: #7c5cff;
-  --brand-2: #2fe6c1;
-  --link: #b7a8ff;
+  /* Accents (no purple) */
+  --brand: #2f3bd6;     /* indigo */
+  --brand-2: #12bfa3;   /* teal */
+
+  --link: #a8b2ff;      /* indigo-tinted link */
 
   --shadow: 0 10px 30px rgba(0,0,0,0.35);
-
   --header-bg: rgba(11,16,32,0.55);
 }
 
 /* -----------------------------
    Light theme
+   No purple: primary accent is INDIGO
    ----------------------------- */
 
 :root[data-theme="light"]{
@@ -58,12 +62,13 @@
   --text: rgba(10,15,30,0.92);
   --muted: rgba(10,15,30,0.65);
 
-  --brand: #4f46e5;
-  --brand-2: #0ea5a4;
-  --link: #4f46e5;
+  /* Accents (no purple) */
+  --brand: #2430c6;     /* indigo */
+  --brand-2: #0d9488;   /* teal */
+
+  --link: #1f2aa8;
 
   --shadow: 0 10px 30px rgba(10,15,30,0.12);
-
   --header-bg: rgba(246,247,251,0.70);
 }
 
@@ -72,7 +77,6 @@
    ----------------------------- */
 
 *{ box-sizing: border-box; }
-
 html, body{ height: 100%; }
 
 body{
@@ -80,12 +84,17 @@ body{
   font-family: var(--font);
   color: var(--text);
 
+  /* Background glow uses brand tokens (indigo + teal), not hardcoded purple */
   background:
-    radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,0.28), transparent 55%),
-    radial-gradient(900px 500px at 80% 0%, rgba(47,230,193,0.18), transparent 55%),
-    radial-gradient(1000px 800px at 50% 100%, rgba(124,92,255,0.12), transparent 60%),
+    radial-gradient(900px 500px at 20% 10%, rgba(47,59,214,0.26), transparent 55%),
+    radial-gradient(900px 500px at 80% 0%, rgba(18,191,163,0.18), transparent 55%),
+    radial-gradient(1000px 800px at 50% 100%, rgba(47,59,214,0.12), transparent 60%),
     var(--bg);
 }
+
+/* Links */
+a{ color: var(--link); text-decoration: none; }
+a:hover{ text-decoration: underline; }
 
 /* -----------------------------
    Utilities
@@ -159,6 +168,7 @@ body{
 
 /* -----------------------------
    Bubble (pill) navigation
+   Hover states are brand-based (indigo), not purple
    ----------------------------- */
 
 .nav{
@@ -189,16 +199,17 @@ body{
 .nav a:hover{
   transform: translateY(-1px);
   text-decoration: none;
-  border-color: rgba(255,255,255,0.24);
+  border-color: rgba(47,59,214,0.55); /* brand-based */
 }
 
 .nav a.active{
-  border-color: rgba(124,92,255,0.65);
-  background: linear-gradient(180deg, rgba(124,92,255,0.28), rgba(255,255,255,0.05));
+  border-color: rgba(47,59,214,0.70);
+  background: linear-gradient(180deg, rgba(47,59,214,0.22), rgba(255,255,255,0.05));
 }
 
 /* -----------------------------
    Theme toggle button
+   Hover states are brand-based (indigo)
    ----------------------------- */
 
 .theme-toggle{
@@ -208,18 +219,18 @@ body{
   border-radius: var(--radius-pill);
   border: 1px solid var(--border);
 
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,004));
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
   color: var(--text);
 
   cursor: pointer;
   user-select: none;
 
-  transition: transform 120ms ease, border-color 120ms ease;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }
 
 .theme-toggle:hover{
   transform: translateY(-1px);
-  border-color: rgba(124,92,255,0.60);
+  border-color: rgba(47,59,214,0.70);
 }
 
 /* -----------------------------
@@ -306,6 +317,7 @@ main{
 
 /* -----------------------------
    Team member cards
+   Hover states are brand-based (indigo)
    ----------------------------- */
 
 .people-grid{
@@ -330,7 +342,7 @@ main{
 .person:hover{
   transform: translateY(-1px);
   text-decoration: none;
-  border-color: rgba(124,92,255,0.55);
+  border-color: rgba(47,59,214,0.55);
   background: var(--surface-2);
 }
 
